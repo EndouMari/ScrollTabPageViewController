@@ -1,0 +1,291 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C8C50CD1C11B617008A69C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8C50CC1C11B617008A69C9 /* AppDelegate.swift */; };
+		4C8C50CF1C11B617008A69C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8C50CE1C11B617008A69C9 /* ViewController.swift */; };
+		4C8C50D21C11B617008A69C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C8C50D01C11B617008A69C9 /* Main.storyboard */; };
+		4C8C50D41C11B617008A69C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C8C50D31C11B617008A69C9 /* Assets.xcassets */; };
+		4C8C50D71C11B617008A69C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C8C50D51C11B617008A69C9 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4C8C50C91C11B617008A69C9 /* ScrollTabPageViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrollTabPageViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C8C50CC1C11B617008A69C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4C8C50CE1C11B617008A69C9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4C8C50D11C11B617008A69C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4C8C50D31C11B617008A69C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4C8C50D61C11B617008A69C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4C8C50D81C11B617008A69C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4C8C50C61C11B617008A69C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4C8C50C01C11B617008A69C9 = {
+			isa = PBXGroup;
+			children = (
+				4C8C50CB1C11B617008A69C9 /* ScrollTabPageViewController */,
+				4C8C50CA1C11B617008A69C9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4C8C50CA1C11B617008A69C9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C8C50C91C11B617008A69C9 /* ScrollTabPageViewController.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C8C50CB1C11B617008A69C9 /* ScrollTabPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4C8C50CC1C11B617008A69C9 /* AppDelegate.swift */,
+				4C8C50CE1C11B617008A69C9 /* ViewController.swift */,
+				4C8C50D01C11B617008A69C9 /* Main.storyboard */,
+				4C8C50D31C11B617008A69C9 /* Assets.xcassets */,
+				4C8C50D51C11B617008A69C9 /* LaunchScreen.storyboard */,
+				4C8C50D81C11B617008A69C9 /* Info.plist */,
+			);
+			path = ScrollTabPageViewController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4C8C50C81C11B617008A69C9 /* ScrollTabPageViewController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C8C50DB1C11B617008A69C9 /* Build configuration list for PBXNativeTarget "ScrollTabPageViewController" */;
+			buildPhases = (
+				4C8C50C51C11B617008A69C9 /* Sources */,
+				4C8C50C61C11B617008A69C9 /* Frameworks */,
+				4C8C50C71C11B617008A69C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScrollTabPageViewController;
+			productName = ScrollTabPageViewController;
+			productReference = 4C8C50C91C11B617008A69C9 /* ScrollTabPageViewController.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4C8C50C11C11B617008A69C9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = EndouMari;
+				TargetAttributes = {
+					4C8C50C81C11B617008A69C9 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 4C8C50C41C11B617008A69C9 /* Build configuration list for PBXProject "ScrollTabPageViewController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4C8C50C01C11B617008A69C9;
+			productRefGroup = 4C8C50CA1C11B617008A69C9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4C8C50C81C11B617008A69C9 /* ScrollTabPageViewController */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4C8C50C71C11B617008A69C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C8C50D71C11B617008A69C9 /* LaunchScreen.storyboard in Resources */,
+				4C8C50D41C11B617008A69C9 /* Assets.xcassets in Resources */,
+				4C8C50D21C11B617008A69C9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4C8C50C51C11B617008A69C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C8C50CF1C11B617008A69C9 /* ViewController.swift in Sources */,
+				4C8C50CD1C11B617008A69C9 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4C8C50D01C11B617008A69C9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C8C50D11C11B617008A69C9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4C8C50D51C11B617008A69C9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C8C50D61C11B617008A69C9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4C8C50D91C11B617008A69C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4C8C50DA1C11B617008A69C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4C8C50DC1C11B617008A69C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ScrollTabPageViewController/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jp.vasily.ScrollTabPageViewController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4C8C50DD1C11B617008A69C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ScrollTabPageViewController/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jp.vasily.ScrollTabPageViewController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4C8C50C41C11B617008A69C9 /* Build configuration list for PBXProject "ScrollTabPageViewController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C8C50D91C11B617008A69C9 /* Debug */,
+				4C8C50DA1C11B617008A69C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C8C50DB1C11B617008A69C9 /* Build configuration list for PBXNativeTarget "ScrollTabPageViewController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C8C50DC1C11B617008A69C9 /* Debug */,
+				4C8C50DD1C11B617008A69C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4C8C50C11C11B617008A69C9 /* Project object */;
+}
