@@ -25,11 +25,10 @@ class ScrollTabPageViewController: UIPageViewController {
     private var pageViewControllers: [UIViewController] = []
     private var contentsView: ContentsView!
     private var currentIndex: Int? {
-        if let viewController = viewControllers?.first {
-            let index = indexOfViewController(viewController)
-            return index
+        guard let viewController = viewControllers?.first, index = pageViewControllers.indexOf(viewController) else {
+            return nil
         }
-        return nil
+        return index
     }
 
     override func viewDidLoad() {
@@ -40,9 +39,10 @@ class ScrollTabPageViewController: UIPageViewController {
 }
 
 
-// View
+// MARK: - View
 
 extension ScrollTabPageViewController {
+
     private func setupOutlets() {
         setupViewControllers()
         setupPageViewController()
@@ -52,6 +52,7 @@ extension ScrollTabPageViewController {
     private func setupViewControllers() {
         let sb1 = UIStoryboard(name: "TableViewController", bundle: nil)
         let vc1 = sb1.instantiateViewControllerWithIdentifier("TableViewController")
+
         let sb2 = UIStoryboard(name: "TableViewController", bundle: nil)
         let vc2 = sb2.instantiateViewControllerWithIdentifier("TableViewController")
 
@@ -69,22 +70,24 @@ extension ScrollTabPageViewController {
     }
 
     private func setupContentsView() {
-        contentsView = ContentsView(frame: CGRectMake(0.0, 0.0, view.frame.width, 280.0))
+        contentsView = ContentsView(frame: CGRectMake(0.0, 0.0, view.frame.width, self.dynamicType.contentViewHeihgt))
         contentsView.tabButtonPressedBlock = { [weak self] (index: Int) in
-            if let uself = self {
-                let direction: UIPageViewControllerNavigationDirection = uself.currentIndex < index ? .Forward : .Reverse
-                uself.setViewControllers([uself.pageViewControllers[index]],
-                    direction: direction,
-                    animated: true,
-                    completion: { [weak self] (completed: Bool) in
-                        if let uself = self {
-                            if let vc = uself.pageViewControllers[index] as? ScrollTabPageViewControllerProtocol {
-                                let scroll = uself.scrollContentOffsetY
-                                vc.setupContentOffsetY(-scroll)
-                            }
-                        }
-                    })
+            guard let uself = self else {
+                return
             }
+
+            let direction: UIPageViewControllerNavigationDirection = (uself.currentIndex < index) ? .Forward : .Reverse
+            uself.setViewControllers([uself.pageViewControllers[index]],
+                direction: direction,
+                animated: true,
+                completion: { [weak self] (completed: Bool) in
+                    guard let uself = self, vc = uself.pageViewControllers[index] as? ScrollTabPageViewControllerProtocol else {
+                        return
+                    }
+
+                    let scroll = uself.scrollContentOffsetY
+                    vc.setupContentOffsetY(-scroll)
+                })
         }
 
         contentsView.scrollDidChangedBlock = { [weak self] (scroll: CGFloat, shouldScrollFrame: Bool) in
@@ -109,33 +112,33 @@ extension ScrollTabPageViewController {
 }
 
 
-// UIPageViewControllerDateSource
+// MARK: - UIPageViewControllerDateSource
 
 extension ScrollTabPageViewController: UIPageViewControllerDataSource {
-    private func indexOfViewController(viewController: UIViewController) -> Int {
-        return (pageViewControllers as NSArray).indexOfObject(viewController)
-    }
 
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        var index: Int = indexOfViewController(viewController)
 
-        if index == NSNotFound { return nil }
+        guard var index = pageViewControllers.indexOf(viewController) else {
+            return nil
+        }
 
         index++
 
-        if index < pageViewControllers.count {
+        if index >= 0 && index < pageViewControllers.count {
             return pageViewControllers[index]
         }
         return nil
     }
 
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        var index: Int = indexOfViewController(viewController)
 
-        if index == NSNotFound { return nil }
+        guard var index = pageViewControllers.indexOf(viewController) else {
+            return nil
+        }
 
         index--
-        if index >= 0  {
+
+        if index >= 0 && index < pageViewControllers.count {
             return pageViewControllers[index]
         }
         return nil
@@ -143,22 +146,26 @@ extension ScrollTabPageViewController: UIPageViewControllerDataSource {
 }
 
 
-// UIPageViewControllerDelegate
+// MARK: - UIPageViewControllerDelegate
 
 extension ScrollTabPageViewController: UIPageViewControllerDelegate {
 
     func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
-        if let vc = pendingViewControllers.first as? ScrollTabPageViewControllerProtocol {
-            let scroll = scrollContentOffsetY
-            vc.setupContentOffsetY(-scroll)
+        guard let vc = pendingViewControllers.first as? ScrollTabPageViewControllerProtocol else {
+            return
         }
+
+        let scroll = scrollContentOffsetY
+        vc.setupContentOffsetY(-scroll)
     }
 
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        if previousViewControllers.first != nil {
-            if let currentIndex = currentIndex where contentsView.tabButtons.count > currentIndex {
-                contentsView.updateCurrentIndex(currentIndex, animated: false)
-            }
+        guard let _ = previousViewControllers.first, currentIndex = currentIndex else {
+            return
+        }
+
+        if currentIndex >= 0 && currentIndex < contentsView.tabButtons.count {
+            contentsView.updateCurrentIndex(currentIndex, animated: false)
         }
     }
 }

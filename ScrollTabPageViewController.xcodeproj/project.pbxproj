@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C1907AE1C15A24E00FB8DBC /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C1907AD1C15A24E00FB8DBC /* sample.jpg */; };
 		4C8C50CD1C11B617008A69C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8C50CC1C11B617008A69C9 /* AppDelegate.swift */; };
 		4C8C50D41C11B617008A69C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C8C50D31C11B617008A69C9 /* Assets.xcassets */; };
 		4C8C50D71C11B617008A69C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C8C50D51C11B617008A69C9 /* LaunchScreen.storyboard */; };
@@ -20,7 +19,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4C1907AD1C15A24E00FB8DBC /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
 		4C8C50C91C11B617008A69C9 /* ScrollTabPageViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrollTabPageViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C8C50CC1C11B617008A69C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C8C50D31C11B617008A69C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -45,14 +43,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4C1907AC1C15A24000FB8DBC /* images */ = {
-			isa = PBXGroup;
-			children = (
-				4C1907AD1C15A24E00FB8DBC /* sample.jpg */,
-			);
-			name = images;
-			sourceTree = "<group>";
-		};
 		4C8C50C01C11B617008A69C9 = {
 			isa = PBXGroup;
 			children = (
@@ -72,7 +62,6 @@
 		4C8C50CB1C11B617008A69C9 /* ScrollTabPageViewController */ = {
 			isa = PBXGroup;
 			children = (
-				4C1907AC1C15A24000FB8DBC /* images */,
 				4C8C50CC1C11B617008A69C9 /* AppDelegate.swift */,
 				4C8C50D31C11B617008A69C9 /* Assets.xcassets */,
 				4C8C50D81C11B617008A69C9 /* Info.plist */,
@@ -162,7 +151,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C8C50D71C11B617008A69C9 /* LaunchScreen.storyboard in Resources */,
-				4C1907AE1C15A24E00FB8DBC /* sample.jpg in Resources */,
 				4C8C50E21C11C5DF008A69C9 /* ScrollTabPageViewController.storyboard in Resources */,
 				4C8C50EF1C13CB27008A69C9 /* TableViewController.storyboard in Resources */,
 				4C8C50D41C11B617008A69C9 /* Assets.xcassets in Resources */,
