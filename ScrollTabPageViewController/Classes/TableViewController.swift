@@ -11,47 +11,47 @@ import UIKit
 class TableViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
-    private var shouldUpdateContentOffsetY: Bool = true
+    private var shouldUpdateContentOffsetY = true
+    private var scrollStartPositionY: CGFloat = 0.0
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
         tableView.dataSource = self
         tableView.delegate = self
+
         setupContentInset()
+
+        scrollTabPageViewController.shouldScrollFrame = false
+
         if shouldUpdateContentOffsetY {
             setupContentOffsetY(-scrollTabPageViewController.scrollContentOffsetY)
             shouldUpdateContentOffsetY = false
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-
-        if isViewLoaded() && view.window == nil {
-            view = nil
-        }
-    }
 }
 
-// UITableVIewDataSource 
+
+// MARK: - UITableVIewDataSource
 
 extension TableViewController: UITableViewDataSource {
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 100
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
+        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "Cell")
         cell.textLabel?.text = String(indexPath.row)
         return cell
     }
 }
 
 
-// UIScrollViewDelegate 
+// MARK: - UIScrollViewDelegate
 
 extension TableViewController: UITableViewDelegate {
+
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView.contentOffset.y >= -ScrollTabPageViewController.tabViewHeight {
             let scroll = ScrollTabPageViewController.contentViewHeihgt - ScrollTabPageViewController.tabViewHeight
@@ -60,14 +60,15 @@ extension TableViewController: UITableViewDelegate {
         } else {
             let scroll = ScrollTabPageViewController.contentViewHeihgt + scrollView.contentOffset.y
             scrollTabPageViewController.updateContentView(-scroll)
-            print(scrollView.contentOffset.y)
-            scrollView.scrollIndicatorInsets.top = -scrollView.contentOffset.y
+            let scrollInsetTop = scrollStartPositionY - scroll
+            scrollStartPositionY = scroll
+            scrollView.scrollIndicatorInsets.top += scrollInsetTop
         }
     }
 }
 
 
-// ScrollTabPageViewControllerProtocol
+// MARK: - ScrollTabPageViewControllerProtocol
 
 extension TableViewController: ScrollTabPageViewControllerProtocol {
 
@@ -76,7 +77,6 @@ extension TableViewController: ScrollTabPageViewControllerProtocol {
     }
 
     func setupContentInset() {
-        scrollTabPageViewController.shouldScrollFrame = false
         let inset = UIEdgeInsetsMake(ScrollTabPageViewController.contentViewHeihgt, 0.0, 0.0, 0.0)
         tableView.contentInset = inset
         tableView.scrollIndicatorInsets = inset

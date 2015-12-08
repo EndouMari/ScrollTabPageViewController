@@ -9,8 +9,9 @@
 import UIKit
 
 class ContentsView: UIView {
-    var tabButtonPressedBlock: (Int -> Void)?
+
     var currentIndex: Int = 0
+    var tabButtonPressedBlock: ((index: Int) -> Void)?
     var scrollDidChangedBlock: ((scroll: CGFloat, shouldScroll: Bool) -> Void)?
 
     private var scrollStart: CGFloat = 0.0
@@ -28,12 +29,14 @@ class ContentsView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+
         sharedInit()
     }
 
     private func sharedInit() {
         NSBundle.mainBundle().loadNibNamed("ContentsView", owner: self, options: nil)
         addSubview(contentView)
+
         setupConstraints()
 
         scrollView.delegate = self
@@ -42,9 +45,10 @@ class ContentsView: UIView {
 }
 
 
-// View
+// MARK: - View
 
 extension ContentsView {
+
     private func setupConstraints() {
         let topConstraint = NSLayoutConstraint(item: contentView, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 0.0)
 
@@ -57,7 +61,14 @@ extension ContentsView {
         let constraints = [topConstraint, bottomConstraint, leftConstraint, rightConstraint]
 
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        self.addConstraints(constraints)
+        addConstraints(constraints)
+    }
+
+    private func randomColor() -> UIColor {
+        let red = Float(arc4random_uniform(255)) / 255.0
+        let green = Float(arc4random_uniform(255)) / 255.0
+        let blue = Float(arc4random_uniform(255)) / 255.0
+        return UIColor(colorLiteralRed: red, green: green, blue: blue, alpha: 1.0)
     }
 
     func updateCurrentIndex(index: Int, animated: Bool) {
@@ -65,22 +76,15 @@ extension ContentsView {
         tabButtons[index].backgroundColor = UIColor(red: 0.88, green: 1.0, blue: 0.87, alpha: 1.0)
         currentIndex = index
     }
-
-    private func randomColor() -> UIColor {
-        let red: Float = Float(arc4random_uniform(100)) * 0.01
-        let green: Float = Float(arc4random_uniform(100)) * 0.01
-        let blue: Float = Float(arc4random_uniform(100)) * 0.01
-
-        return UIColor(colorLiteralRed: red, green: green, blue: blue, alpha: 1.0)
-    }
 }
 
 
-// UIScrollViewDelegate 
+// MARK: - UIScrollViewDelegate
 
 extension ContentsView: UIScrollViewDelegate {
+
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 0.0 || self.frame.minY < 0.0 {
+        if scrollView.contentOffset.y > 0.0 || frame.minY < 0.0 {
             scrollDidChangedBlock?(scroll: scrollView.contentOffset.y, shouldScroll: true)
             scrollView.contentOffset.y = 0.0
         } else {
@@ -92,7 +96,7 @@ extension ContentsView: UIScrollViewDelegate {
 }
 
 
-// IBAction
+// MARK: - IBAction
 
 extension ContentsView {
 
@@ -100,9 +104,8 @@ extension ContentsView {
         containerView.backgroundColor = randomColor()
     }
 
-
-    @IBAction func tabButtonTouchUpInside(button: UIButton) {
-        tabButtonPressedBlock?(button.tag)
+    @IBAction private func tabButtonTouchUpInside(button: UIButton) {
+        tabButtonPressedBlock?(index: button.tag)
         updateCurrentIndex(button.tag, animated: true)
     }
 }
