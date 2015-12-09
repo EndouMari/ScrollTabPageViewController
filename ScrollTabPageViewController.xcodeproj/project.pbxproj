@@ -14,8 +14,8 @@
 		4C8C50E21C11C5DF008A69C9 /* ScrollTabPageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C8C50E11C11C5DF008A69C9 /* ScrollTabPageViewController.storyboard */; };
 		4C8C50E91C13CA79008A69C9 /* ContentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C8C50E81C13CA79008A69C9 /* ContentsView.xib */; };
 		4C8C50EB1C13CA86008A69C9 /* ContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8C50EA1C13CA86008A69C9 /* ContentsView.swift */; };
-		4C8C50ED1C13CB18008A69C9 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8C50EC1C13CB18008A69C9 /* TableViewController.swift */; };
-		4C8C50EF1C13CB27008A69C9 /* TableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C8C50EE1C13CB27008A69C9 /* TableViewController.storyboard */; };
+		4C8C50ED1C13CB18008A69C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8C50EC1C13CB18008A69C9 /* ViewController.swift */; };
+		4C8C50EF1C13CB27008A69C9 /* ViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C8C50EE1C13CB27008A69C9 /* ViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +28,8 @@
 		4C8C50E11C11C5DF008A69C9 /* ScrollTabPageViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ScrollTabPageViewController.storyboard; path = Classes/ScrollTabPageViewController.storyboard; sourceTree = "<group>"; };
 		4C8C50E81C13CA79008A69C9 /* ContentsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContentsView.xib; path = Classes/ContentsView.xib; sourceTree = "<group>"; };
 		4C8C50EA1C13CA86008A69C9 /* ContentsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentsView.swift; path = Classes/ContentsView.swift; sourceTree = "<group>"; };
-		4C8C50EC1C13CB18008A69C9 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = Classes/TableViewController.swift; sourceTree = "<group>"; };
-		4C8C50EE1C13CB27008A69C9 /* TableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = TableViewController.storyboard; path = Classes/TableViewController.storyboard; sourceTree = "<group>"; };
+		4C8C50EC1C13CB18008A69C9 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Classes/ViewController.swift; sourceTree = "<group>"; };
+		4C8C50EE1C13CB27008A69C9 /* ViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ViewController.storyboard; path = Classes/ViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +77,8 @@
 			children = (
 				4C8C50E11C11C5DF008A69C9 /* ScrollTabPageViewController.storyboard */,
 				4C8C50DE1C11C526008A69C9 /* ScrollTabPageViewController.swift */,
-				4C8C50EE1C13CB27008A69C9 /* TableViewController.storyboard */,
-				4C8C50EC1C13CB18008A69C9 /* TableViewController.swift */,
+				4C8C50EE1C13CB27008A69C9 /* ViewController.storyboard */,
+				4C8C50EC1C13CB18008A69C9 /* ViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -152,7 +152,7 @@
 			files = (
 				4C8C50D71C11B617008A69C9 /* LaunchScreen.storyboard in Resources */,
 				4C8C50E21C11C5DF008A69C9 /* ScrollTabPageViewController.storyboard in Resources */,
-				4C8C50EF1C13CB27008A69C9 /* TableViewController.storyboard in Resources */,
+				4C8C50EF1C13CB27008A69C9 /* ViewController.storyboard in Resources */,
 				4C8C50D41C11B617008A69C9 /* Assets.xcassets in Resources */,
 				4C8C50E91C13CA79008A69C9 /* ContentsView.xib in Resources */,
 			);
@@ -167,7 +167,7 @@
 			files = (
 				4C8C50CD1C11B617008A69C9 /* AppDelegate.swift in Sources */,
 				4C8C50EB1C13CA86008A69C9 /* ContentsView.swift in Sources */,
-				4C8C50ED1C13CB18008A69C9 /* TableViewController.swift in Sources */,
+				4C8C50ED1C13CB18008A69C9 /* ViewController.swift in Sources */,
 				4C8C50DF1C11C526008A69C9 /* ScrollTabPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
