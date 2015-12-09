@@ -25,11 +25,6 @@ class ViewController: UIViewController {
 
         scrollTabPageViewController.updateLayoutIfNeeded()
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-    }
 }
 
 

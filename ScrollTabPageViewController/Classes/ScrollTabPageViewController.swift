@@ -20,8 +20,9 @@ class ScrollTabPageViewController: UIPageViewController {
     private var pageViewControllers: [UIViewController] = []
     private var contentsView: ContentsView!
     private var scrollContentOffsetY: CGFloat = 0.0
-    private var shouldScrollFrame: Bool?
+    private var shouldScrollFrame: Bool = true
     private var shouldUpdateLayout: Bool = false
+    private var updateIndex: Int = 0
     private var currentIndex: Int? {
         guard let viewController = viewControllers?.first, index = pageViewControllers.indexOf(viewController) else {
             return nil
@@ -77,6 +78,7 @@ extension ScrollTabPageViewController {
             }
 
             uself.shouldUpdateLayout = true
+            uself.updateIndex = index
             let direction: UIPageViewControllerNavigationDirection = (uself.currentIndex < index) ? .Forward : .Reverse
             uself.setViewControllers([uself.pageViewControllers[index]],
                 direction: direction,
@@ -123,18 +125,16 @@ extension ScrollTabPageViewController {
         if scroll == 0.0 {
             vc.scrollView.contentOffset.y = -contentViewHeihgt
         } else if (scroll < contentViewHeihgt - tabViewHeight) || (vc.scrollView.contentOffset.y <= -tabViewHeight) {
-            vc.scrollView.contentOffset.y = -(contentViewHeihgt - scroll)
+            vc.scrollView.contentOffset.y = scroll - contentViewHeihgt
         }
     }
 
     private func updateContentView(scroll: CGFloat) {
-        if shouldScrollFrame == false {
-            shouldScrollFrame = nil
-        } else {
+        if shouldScrollFrame {
             contentsView.frame.origin.y = scroll
             scrollContentOffsetY = scroll
-            shouldScrollFrame = nil
         }
+        shouldScrollFrame = true
     }
 
     private func updateContentOffsetY(scroll: CGFloat) {
@@ -161,16 +161,12 @@ extension ScrollTabPageViewController {
 
     func updateLayoutIfNeeded() {
         if shouldUpdateLayout {
-            guard let currentIndex = currentIndex else {
-                return
-            }
-
-            let vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol
+            let vc = pageViewControllers[updateIndex] as? ScrollTabPageViewControllerProtocol
             let shouldSetupContentOffsetY = vc?.scrollView.contentInset.top != contentViewHeihgt
-
+            
             let scroll = scrollContentOffsetY
             setupContentInset()
-            setupContentOffsetY(currentIndex, scroll: -scroll)
+            setupContentOffsetY(updateIndex, scroll: -scroll)
             shouldUpdateLayout = shouldSetupContentOffsetY
         }
     }
@@ -217,9 +213,10 @@ extension ScrollTabPageViewController: UIPageViewControllerDelegate {
 
     func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
         if let vc = pendingViewControllers.first, index = pageViewControllers.indexOf(vc) {
-            let scroll = scrollContentOffsetY
-            setupContentOffsetY(index, scroll: -scroll)
+            shouldUpdateLayout = true
+            updateIndex = index
         }
+
     }
 
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
@@ -227,11 +224,8 @@ extension ScrollTabPageViewController: UIPageViewControllerDelegate {
             return
         }
 
-        let vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol
-        let shouldSetupContentOffsetY = vc?.scrollView.contentInset.top != contentViewHeihgt
-        setupContentInset()
-
-        if shouldSetupContentOffsetY == true {
+        if shouldUpdateLayout {
+            setupContentInset()
             setupContentOffsetY(currentIndex, scroll: -scrollContentOffsetY)
         }
 
