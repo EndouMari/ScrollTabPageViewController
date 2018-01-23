@@ -46,7 +46,12 @@ extension ViewController: UITableViewDataSource {
 // MARK: - UIScrollViewDelegate
 
 extension ViewController: UITableViewDelegate {
+    /**
+     viewControllerへのスクロールを検知
+     - parameter scrollView: scrollView
+     */
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // contentsViewのスクロールを同期
         scrollTabPageViewController.updateContentViewFrame()
     }
 }

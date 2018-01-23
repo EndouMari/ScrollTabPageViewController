@@ -13,7 +13,6 @@ class ContentsView: UIView {
     // 選択されているtabボタンのindex
     var currentIndex: Int = 0
     
-    
     var tabButtonPressedBlock: ((_ index: Int) -> Void)?
     var scrollDidChangedBlock: ((_ scroll: CGFloat, _ shouldScroll: Bool) -> Void)?
 
@@ -23,17 +22,16 @@ class ContentsView: UIView {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet var tabButtons: [UIButton]!
-    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var segmentedControlHeight: NSLayoutConstraint!
+    let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-
         sharedInit()
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         sharedInit()
     }
 
@@ -55,7 +53,7 @@ extension ContentsView {
 
     // 制約を更新
     func setupConstraints() {
-        let topConstraint = NSLayoutConstraint(item: contentView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(item: contentView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 20.0)
 
         let bottomConstraint = NSLayoutConstraint(item: contentView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0.0)
 
@@ -69,6 +67,10 @@ extension ContentsView {
         addConstraints(constraints)
     }
 
+    /**
+     ランダムな色を取得
+     - returns: ランダムな色
+     */
     func randomColor() -> UIColor {
         let red = CGFloat(arc4random_uniform(255)) / 255.0
         let green = CGFloat(arc4random_uniform(255)) / 255.0
@@ -82,8 +84,7 @@ extension ContentsView {
      - parameter animated: アニメーションするかのBOOL
      */
     func updateCurrentIndex(index: Int, animated: Bool) {
-        tabButtons[currentIndex].backgroundColor = UIColor.white
-        tabButtons[index].backgroundColor = UIColor(red: 0.88, green: 1.0, blue: 0.87, alpha: 1.0)
+        segmentedControl.selectedSegmentIndex = index
         currentIndex = index
     }
 }
@@ -93,8 +94,18 @@ extension ContentsView {
 
 extension ContentsView: UIScrollViewDelegate {
 
+    /**
+     contentsViewへのスクロールを検知
+     - parameter scrollView: scrollView
+     */
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 0.0 || frame.minY < 0.0 {
+        if scrollView.contentOffset.y > statusBarHeight {
+            scrollDidChangedBlock?(scrollView.contentOffset.y, true)
+            scrollView.contentOffset.y = statusBarHeight
+        } else if scrollView.contentOffset.y > 0.0 {
+            scrollDidChangedBlock?(scrollView.contentOffset.y, true)
+            scrollView.contentOffset.y = 0.0
+        } else if frame.minY < 0.0 {
             scrollDidChangedBlock?(scrollView.contentOffset.y, true)
             scrollView.contentOffset.y = 0.0
         } else {
@@ -112,9 +123,8 @@ extension ContentsView {
     @IBAction private func touchButtonTouchUpInside(_ sender: UIButton) {
         containerView.backgroundColor = randomColor()
     }
-    
-    @IBAction func tabButtonTouchUpInside(_ sender: UIButton) {
-        tabButtonPressedBlock?(sender.tag)
-        updateCurrentIndex(index: sender.tag, animated: true)
+    @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
+        tabButtonPressedBlock?(sender.selectedSegmentIndex)
+        updateCurrentIndex(index: sender.selectedSegmentIndex, animated: true)
     }
 }
