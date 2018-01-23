@@ -201,9 +201,8 @@ extension ScrollTabPageViewController {
             let vc = pageViewControllers[updateIndex] as? ScrollTabPageViewControllerProtocol
             let shouldSetupContentOffsetY = vc?.scrollView.contentInset.top != contentViewHeihgt
             
-            let scroll = scrollContentOffsetY
             setupContentInset()
-            setupContentOffsetY(index: updateIndex, scroll: -scroll)
+            setupContentOffsetY(index: updateIndex, scroll: -scrollContentOffsetY)
             shouldUpdateLayout = shouldSetupContentOffsetY
         }
     }
