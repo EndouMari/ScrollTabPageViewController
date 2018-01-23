@@ -50,13 +50,13 @@ extension ScrollTabPageViewController {
     }
 
     /// viewControllerをセットアップ
-    /// テスト実装なので、vcの元は一緒。本実装で変更予定
+    /// 別々のviewControllerを設定する場合はvc1&2の読み込み内容を変更する
     func setupViewControllers() {
-        // viewContrroller(仮1)
+        // viewContrroller
         let sb1 = UIStoryboard(name: "ViewController", bundle: nil)
         let vc1 = sb1.instantiateViewController(withIdentifier: "ViewController")
 
-        // viewContrroller(仮2)
+        // viewContrroller
         let sb2 = UIStoryboard(name: "ViewController", bundle: nil)
         let vc2 = sb2.instantiateViewController(withIdentifier: "ViewController")
 

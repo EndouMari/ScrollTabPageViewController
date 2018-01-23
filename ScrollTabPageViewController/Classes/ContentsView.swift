@@ -69,6 +69,10 @@ extension ContentsView {
         addConstraints(constraints)
     }
 
+    /**
+     ランダムな色を取得
+     - returns: ランダムな色
+     */
     func randomColor() -> UIColor {
         let red = CGFloat(arc4random_uniform(255)) / 255.0
         let green = CGFloat(arc4random_uniform(255)) / 255.0
@@ -93,6 +97,10 @@ extension ContentsView {
 
 extension ContentsView: UIScrollViewDelegate {
 
+    /**
+     contentsViewへのスクロールを検知
+     - parameter scrollView: scrollView
+     */
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 0.0 || frame.minY < 0.0 {
             scrollDidChangedBlock?(scrollView.contentOffset.y, true)
