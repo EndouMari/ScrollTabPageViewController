@@ -14,6 +14,7 @@ class ContentsView: UIView {
     var currentIndex: Int = 0
     
     
+    
     var tabButtonPressedBlock: ((_ index: Int) -> Void)?
     var scrollDidChangedBlock: ((_ scroll: CGFloat, _ shouldScroll: Bool) -> Void)?
 
@@ -23,7 +24,9 @@ class ContentsView: UIView {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet var tabButtons: [UIButton]!
+    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var segmentedControlHeight: NSLayoutConstraint!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -36,7 +39,8 @@ class ContentsView: UIView {
 
         sharedInit()
     }
-
+    
+    
     private func sharedInit() {
         Bundle.main.loadNibNamed("ContentsView", owner: self, options: nil)
         addSubview(contentView)
@@ -86,8 +90,7 @@ extension ContentsView {
      - parameter animated: アニメーションするかのBOOL
      */
     func updateCurrentIndex(index: Int, animated: Bool) {
-        tabButtons[currentIndex].backgroundColor = UIColor.white
-        tabButtons[index].backgroundColor = UIColor(red: 0.88, green: 1.0, blue: 0.87, alpha: 1.0)
+        segmentedControl.selectedSegmentIndex = index
         currentIndex = index
     }
 }
@@ -120,9 +123,8 @@ extension ContentsView {
     @IBAction private func touchButtonTouchUpInside(_ sender: UIButton) {
         containerView.backgroundColor = randomColor()
     }
-    
-    @IBAction func tabButtonTouchUpInside(_ sender: UIButton) {
-        tabButtonPressedBlock?(sender.tag)
-        updateCurrentIndex(index: sender.tag, animated: true)
+    @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
+        tabButtonPressedBlock?(sender.selectedSegmentIndex)
+        updateCurrentIndex(index: sender.selectedSegmentIndex, animated: true)
     }
 }

@@ -25,9 +25,6 @@ class ScrollTabPageViewController: UIPageViewController {
     // contentViewの高さ
     let contentViewHeihgt: CGFloat = 280.0
     
-    // tabViewの高さ
-    let tabViewHeight: CGFloat = 44.0
-    
     // contentsViewのスクロールの値
     var scrollContentOffsetY: CGFloat = 0.0
     
@@ -99,6 +96,7 @@ extension ScrollTabPageViewController {
             guard let uself = self else {
                 return
             }
+            
 
             uself.shouldUpdateLayout = true
             uself.updateIndex = index
@@ -136,6 +134,7 @@ extension ScrollTabPageViewController {
         guard let currentIndex = currentIndex, let vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol else {
             return
         }
+        
 
         let inset = UIEdgeInsetsMake(contentViewHeihgt, 0.0, 0.0, 0.0)
         vc.scrollView.contentInset = inset
@@ -154,7 +153,7 @@ extension ScrollTabPageViewController {
 
         if scroll == 0.0 {
             vc.scrollView.contentOffset.y = -contentViewHeihgt
-        } else if (scroll < contentViewHeihgt - tabViewHeight) || (vc.scrollView.contentOffset.y <= -tabViewHeight) {
+        } else if (scroll < contentViewHeihgt - contentsView.segmentedControlHeight.constant) || (vc.scrollView.contentOffset.y <= -contentsView.segmentedControlHeight.constant) {
             vc.scrollView.contentOffset.y = scroll - contentViewHeihgt
         }
     }
@@ -186,10 +185,10 @@ extension ScrollTabPageViewController {
             return
         }
 
-        if vc.scrollView.contentOffset.y >= -tabViewHeight {
-            let scroll = contentViewHeihgt - tabViewHeight
+        if vc.scrollView.contentOffset.y >= -contentsView.segmentedControlHeight.constant {
+            let scroll = contentViewHeihgt - contentsView.segmentedControlHeight.constant
             updateContentView(scroll: -scroll)
-            vc.scrollView.scrollIndicatorInsets.top = tabViewHeight
+            vc.scrollView.scrollIndicatorInsets.top = contentsView.segmentedControlHeight.constant
         } else {
             let scroll = contentViewHeihgt + vc.scrollView.contentOffset.y
             updateContentView(scroll: -scroll)
@@ -290,7 +289,7 @@ extension ScrollTabPageViewController: UIPageViewControllerDelegate {
             setupContentOffsetY(index: currentIndex, scroll: -scrollContentOffsetY)
         }
 
-        if currentIndex >= 0 && currentIndex < contentsView.tabButtons.count {
+        if currentIndex >= 0 && currentIndex < contentsView.segmentedControl.numberOfSegments {
             contentsView.updateCurrentIndex(index: currentIndex, animated: false)
         }
     }

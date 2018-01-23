@@ -124,6 +124,7 @@
 				TargetAttributes = {
 					4C8C50C81C11B617008A69C9 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = 9JMCJCA8J2;
 					};
 				};
 			};
@@ -271,6 +272,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9JMCJCA8J2;
 				INFOPLIST_FILE = ScrollTabPageViewController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.vasily.ScrollTabPageViewController;
@@ -283,6 +285,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9JMCJCA8J2;
 				INFOPLIST_FILE = ScrollTabPageViewController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.vasily.ScrollTabPageViewController;
