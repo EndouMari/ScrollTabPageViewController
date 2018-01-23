@@ -20,11 +20,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="zIF-dC-TqL">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="326"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="279"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kzl-ye-VGt">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="326"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="279"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dlF-9e-tCn">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="236"/>
@@ -45,45 +45,31 @@
                                 <constraint firstAttribute="trailing" secondItem="I9r-ec-NOx" secondAttribute="trailing" constant="128" id="tv8-hb-yfE"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOP-Fj-Yt4">
-                            <rect key="frame" x="0.0" y="236" width="320" height="44"/>
-                            <subviews>
-                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WVx-Ef-poS" userLabel="segmentedControl">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="44" id="Jwi-Yh-ZOJ"/>
-                                    </constraints>
-                                    <segments>
-                                        <segment title="First"/>
-                                        <segment title="Second"/>
-                                    </segments>
-                                    <connections>
-                                        <action selector="segmentValueChanged:" destination="-1" eventType="valueChanged" id="sxk-Ed-p2c"/>
-                                    </connections>
-                                </segmentedControl>
-                            </subviews>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WVx-Ef-poS" userLabel="segmentedControl">
+                            <rect key="frame" x="0.0" y="236" width="320" height="45"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="WVx-Ef-poS" secondAttribute="trailing" id="E8F-mP-Kyc"/>
-                                <constraint firstItem="WVx-Ef-poS" firstAttribute="top" secondItem="XOP-Fj-Yt4" secondAttribute="top" id="J3Y-Fp-WSX"/>
-                                <constraint firstItem="WVx-Ef-poS" firstAttribute="leading" secondItem="XOP-Fj-Yt4" secondAttribute="leading" id="Kuq-Ke-is8"/>
-                                <constraint firstAttribute="bottom" secondItem="WVx-Ef-poS" secondAttribute="bottom" id="e7m-3A-ylD"/>
+                                <constraint firstAttribute="height" constant="44" id="Jwi-Yh-ZOJ"/>
                             </constraints>
-                        </view>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentValueChanged:" destination="-1" eventType="valueChanged" id="sxk-Ed-p2c"/>
+                            </connections>
+                        </segmentedControl>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="XOP-Fj-Yt4" secondAttribute="trailing" id="6Oh-Vk-ZQf"/>
+                        <constraint firstItem="WVx-Ef-poS" firstAttribute="leading" secondItem="Kzl-ye-VGt" secondAttribute="leading" id="AXa-qH-y6V"/>
                         <constraint firstItem="dlF-9e-tCn" firstAttribute="top" secondItem="Kzl-ye-VGt" secondAttribute="top" id="Kra-rk-AoZ"/>
-                        <constraint firstAttribute="bottom" secondItem="XOP-Fj-Yt4" secondAttribute="bottom" id="PTr-hh-jto"/>
-                        <constraint firstItem="XOP-Fj-Yt4" firstAttribute="top" secondItem="dlF-9e-tCn" secondAttribute="bottom" id="TbK-cr-l9W"/>
+                        <constraint firstAttribute="trailing" secondItem="WVx-Ef-poS" secondAttribute="trailing" id="PWh-Ae-Dqx"/>
+                        <constraint firstAttribute="bottom" secondItem="WVx-Ef-poS" secondAttribute="bottom" id="Pmv-cX-Vpf"/>
                         <constraint firstAttribute="trailing" secondItem="dlF-9e-tCn" secondAttribute="trailing" id="hpw-kg-Ga8"/>
-                        <constraint firstItem="XOP-Fj-Yt4" firstAttribute="leading" secondItem="Kzl-ye-VGt" secondAttribute="leading" id="k3H-A8-Yoy"/>
-                        <constraint firstItem="XOP-Fj-Yt4" firstAttribute="width" secondItem="Kzl-ye-VGt" secondAttribute="width" id="kWD-gi-Mow"/>
+                        <constraint firstItem="WVx-Ef-poS" firstAttribute="width" secondItem="Kzl-ye-VGt" secondAttribute="width" id="jQD-FQ-iZX"/>
                         <constraint firstItem="dlF-9e-tCn" firstAttribute="leading" secondItem="Kzl-ye-VGt" secondAttribute="leading" id="rGq-LY-ukU"/>
-                        <constraint firstItem="dlF-9e-tCn" firstAttribute="leading" secondItem="Kzl-ye-VGt" secondAttribute="leading" id="tek-Yz-xI3"/>
-                        <constraint firstAttribute="trailing" secondItem="dlF-9e-tCn" secondAttribute="trailing" id="yP8-jT-odC"/>
+                        <constraint firstItem="WVx-Ef-poS" firstAttribute="top" secondItem="dlF-9e-tCn" secondAttribute="bottom" id="ruY-qh-7LR"/>
                     </constraints>
                 </scrollView>
             </subviews>
@@ -97,7 +83,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="129" y="282"/>
+            <point key="canvasLocation" x="129" y="258.5"/>
         </view>
     </objects>
 </document>
