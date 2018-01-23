@@ -134,11 +134,9 @@ extension ScrollTabPageViewController {
         guard let currentIndex = currentIndex, let vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol else {
             return
         }
-        
-
-        let inset = UIEdgeInsetsMake(contentViewHeihgt, 0.0, 0.0, 0.0)
-        vc.scrollView.contentInset = inset
-        vc.scrollView.scrollIndicatorInsets = inset
+        let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
+        vc.scrollView.contentInset.top = contentViewHeihgt + statusBarHeight
+        vc.scrollView.scrollIndicatorInsets.top = contentViewHeihgt + statusBarHeight
     }
 
     /**
