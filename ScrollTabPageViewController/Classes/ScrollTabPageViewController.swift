@@ -131,6 +131,9 @@ extension ScrollTabPageViewController {
 
 extension ScrollTabPageViewController {
 
+    /**
+     contentInsetをセット(初期表示やページングがされた時)
+     */
     func setupContentInset() {
         guard let currentIndex = currentIndex, let vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol else {
             return
