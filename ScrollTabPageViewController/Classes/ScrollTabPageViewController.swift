@@ -139,8 +139,8 @@ extension ScrollTabPageViewController {
             return
         }
         
-        vc.scrollView.contentInset.top = contentViewHeihgt + statusBarHeight
-        vc.scrollView.scrollIndicatorInsets.top = contentViewHeihgt + statusBarHeight
+        vc.scrollView.contentInset.top = contentViewHeihgt
+        vc.scrollView.scrollIndicatorInsets.top = contentViewHeihgt
     }
 
     /**
