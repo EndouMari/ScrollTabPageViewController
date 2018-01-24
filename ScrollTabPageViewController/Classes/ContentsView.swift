@@ -108,7 +108,10 @@ extension ContentsView: UIScrollViewDelegate {
         if scrollView.contentOffset.y > statusBarHeight {
             scrollDidChangedBlock?(scrollView.contentOffset.y, true)
             scrollView.contentOffset.y = statusBarHeight
-        } else if frame.minY < 0.0  {
+        } else if scrollView.contentOffset.y > 0.0 {
+            scrollDidChangedBlock?(scrollView.contentOffset.y, false)
+            scrollView.contentOffset.y = 0.0
+        } else if frame.minY < 0.0 {
             scrollDidChangedBlock?(scrollView.contentOffset.y, true)
             scrollView.contentOffset.y = 0.0
         } else {
