@@ -30,6 +30,7 @@ class ScrollTabPageViewController: UIPageViewController {
     
     var shouldScrollFrame: Bool = true
     var shouldUpdateLayout: Bool = false
+    let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
     
     
     // tabViewControllerの現在のindex
@@ -134,7 +135,7 @@ extension ScrollTabPageViewController {
         guard let currentIndex = currentIndex, let vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol else {
             return
         }
-        let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
+        
         vc.scrollView.contentInset.top = contentViewHeihgt + statusBarHeight
         vc.scrollView.scrollIndicatorInsets.top = contentViewHeihgt + statusBarHeight
     }
@@ -193,7 +194,7 @@ extension ScrollTabPageViewController {
             vc.scrollView.scrollIndicatorInsets.top = -vc.scrollView.contentOffset.y
         }
     }
-
+    
     func updateLayoutIfNeeded() {
         if shouldUpdateLayout {
             let vc = pageViewControllers[updateIndex] as? ScrollTabPageViewControllerProtocol
