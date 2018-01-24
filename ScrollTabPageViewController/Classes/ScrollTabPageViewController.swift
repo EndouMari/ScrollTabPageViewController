@@ -43,7 +43,6 @@ class ScrollTabPageViewController: UIPageViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.setupOutlets()
     }
 }
