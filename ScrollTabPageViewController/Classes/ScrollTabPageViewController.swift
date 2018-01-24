@@ -192,7 +192,7 @@ extension ScrollTabPageViewController {
             updateContentView(scroll: -scroll)
             vc.scrollView.scrollIndicatorInsets.top = contentsView.segmentedControlHeight.constant
         } else {
-            // contentsViewのスクロール更新
+            // contentsViewとtableViewのスクロール更新
             let scroll = contentViewHeihgt + vc.scrollView.contentOffset.y
             updateContentView(scroll: -scroll)
             vc.scrollView.scrollIndicatorInsets.top = -vc.scrollView.contentOffset.y
