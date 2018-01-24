@@ -27,7 +27,7 @@ class ContentsView: UIView {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var segmentedControlHeight: NSLayoutConstraint!
-    
+    let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
 
@@ -105,7 +105,10 @@ extension ContentsView: UIScrollViewDelegate {
      - parameter scrollView: scrollView
      */
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 0.0 || frame.minY < 0.0 {
+        if scrollView.contentOffset.y > statusBarHeight {
+            scrollDidChangedBlock?(scrollView.contentOffset.y, true)
+            scrollView.contentOffset.y = statusBarHeight
+        } else if frame.minY < 0.0  {
             scrollDidChangedBlock?(scrollView.contentOffset.y, true)
             scrollView.contentOffset.y = 0.0
         } else {
