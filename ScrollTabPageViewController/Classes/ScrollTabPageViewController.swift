@@ -116,7 +116,7 @@ extension ScrollTabPageViewController {
                 })
         }
 
-        // スクロールされた時のブロック
+        // contentViewのスクロール表示が変更された時のブロック
         contentsView.scrollDidChangedBlock = { [weak self] (scroll: CGFloat, shouldScrollFrame: Bool) in
             self?.shouldScrollFrame = shouldScrollFrame
             // Y座標を更新する
@@ -158,7 +158,7 @@ extension ScrollTabPageViewController {
     }
 
     /**
-     contentViewを更新
+     viewControllerのスクロールでのcontentViewを更新
      - parameter scroll: 移動した分の座標
      */
     func updateContentView(scroll: CGFloat) {
@@ -184,11 +184,15 @@ extension ScrollTabPageViewController {
             return
         }
 
-        if vc.scrollView.contentOffset.y >= -contentsView.segmentedControlHeight.constant {
+        // 予めスクロールのcontentOffsetはcontentsViewの分だけ差し引かれている。
+        // スクロールの長さがsegmentedControlの高さより大きいかどうか判定
+        if vc.scrollView.contentOffset.y+statusBarHeight >= -contentsView.segmentedControlHeight.constant {
+            // tableViewのスクロール更新
             let scroll = contentViewHeihgt - contentsView.segmentedControlHeight.constant
             updateContentView(scroll: -scroll)
             vc.scrollView.scrollIndicatorInsets.top = contentsView.segmentedControlHeight.constant
         } else {
+            // contentsViewのスクロール更新
             let scroll = contentViewHeihgt + vc.scrollView.contentOffset.y
             updateContentView(scroll: -scroll)
             vc.scrollView.scrollIndicatorInsets.top = -vc.scrollView.contentOffset.y

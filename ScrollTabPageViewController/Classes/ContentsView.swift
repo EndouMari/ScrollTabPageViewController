@@ -101,7 +101,7 @@ extension ContentsView {
 extension ContentsView: UIScrollViewDelegate {
 
     /**
-     contentsViewへのスクロールを検知
+     contentsViewでのスクロールを検知
      - parameter scrollView: scrollView
      */
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
