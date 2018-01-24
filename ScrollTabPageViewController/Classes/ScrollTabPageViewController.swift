@@ -186,7 +186,7 @@ extension ScrollTabPageViewController {
 
         // 予めスクロールのcontentOffsetはcontentsViewの分だけ差し引かれている。
         // スクロールの長さがsegmentedControlの高さより大きいかどうか判定
-        if vc.scrollView.contentOffset.y+statusBarHeight >= -contentsView.segmentedControlHeight.constant {
+        if vc.scrollView.contentOffset.y >= -contentsView.segmentedControlHeight.constant {
             // tableViewのスクロール更新
             let scroll = contentViewHeihgt - contentsView.segmentedControlHeight.constant
             updateContentView(scroll: -scroll)
