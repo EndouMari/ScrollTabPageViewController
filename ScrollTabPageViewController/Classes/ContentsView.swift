@@ -13,7 +13,6 @@ class ContentsView: UIView {
     // 選択されているtabボタンのindex
     var currentIndex: Int = 0
     
-    
     var tabButtonPressedBlock: ((_ index: Int) -> Void)?
     var scrollDidChangedBlock: ((_ scroll: CGFloat, _ shouldScroll: Bool) -> Void)?
 
@@ -28,13 +27,11 @@ class ContentsView: UIView {
     let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-
         sharedInit()
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         sharedInit()
     }
 

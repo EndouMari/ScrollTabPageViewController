@@ -129,26 +129,27 @@ extension ScrollTabPageViewController {
 extension ScrollTabPageViewController {
 
     /**
-     contentInsetをセット(初期表示やページングがされた時)
+     現在のscrollViewのcontentInsetをセット
      */
     func setupCurrentContentInset() {
         guard let currentIndex = currentIndex, let vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol else {
             return
         }
 
-        let inset = UIEdgeInsetsMake(contentViewHeihgt, 0.0, 0.0, 0.0)
-        vc.scrollView.contentInset = inset
-        vc.scrollView.scrollIndicatorInsets = inset
+        vc.scrollView.contentInset.top = contentViewHeihgt
+        vc.scrollView.scrollIndicatorInsets.top = contentViewHeihgt
     }
     
+    /**
+     次のscrollViewのcontentInsetをセット
+     */
     func setupNextContentInset(nextIndex:Int) {
         guard let vc = pageViewControllers[nextIndex] as? ScrollTabPageViewControllerProtocol else {
             return
         }
         
-        let inset = UIEdgeInsetsMake(contentViewHeihgt, 0.0, 0.0, 0.0)
-        vc.scrollView.contentInset = inset
-        vc.scrollView.scrollIndicatorInsets = inset
+        vc.scrollView.contentInset.top = contentViewHeihgt
+        vc.scrollView.scrollIndicatorInsets.top = contentViewHeihgt
     }
 
     /**
