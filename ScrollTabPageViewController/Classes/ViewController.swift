@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +20,8 @@ class ViewController: UIViewController {
     }
 
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         scrollTabPageViewController.updateLayoutIfNeeded()
     }
 }
@@ -32,12 +31,12 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource {
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 100
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "Cell")
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
         cell.textLabel?.text = String(indexPath.row)
         return cell
     }
@@ -47,8 +46,12 @@ extension ViewController: UITableViewDataSource {
 // MARK: - UIScrollViewDelegate
 
 extension ViewController: UITableViewDelegate {
-
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    /**
+     viewControllerへのスクロールを検知
+     - parameter scrollView: scrollView
+     */
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // contentsViewのスクロールを同期
         scrollTabPageViewController.updateContentViewFrame()
     }
 }
@@ -59,7 +62,7 @@ extension ViewController: UITableViewDelegate {
 extension ViewController: ScrollTabPageViewControllerProtocol {
 
     var scrollTabPageViewController: ScrollTabPageViewController {
-        return parentViewController as! ScrollTabPageViewController
+        return parent as! ScrollTabPageViewController
     }
 
     var scrollView: UIScrollView {

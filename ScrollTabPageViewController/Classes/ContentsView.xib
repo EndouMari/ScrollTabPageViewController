@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContentsView" customModule="ScrollTabPageViewController" customModuleProvider="target">
@@ -10,32 +14,30 @@
                 <outlet property="containerView" destination="dlF-9e-tCn" id="xQh-9f-aFX"/>
                 <outlet property="contentView" destination="zIF-dC-TqL" id="CZ5-xp-oCd"/>
                 <outlet property="scrollView" destination="Kzl-ye-VGt" id="824-Ob-cD3"/>
-                <outletCollection property="tabButtons" destination="WRh-Ud-SCY" collectionClass="NSMutableArray" id="oOv-Ly-0Gw"/>
-                <outletCollection property="tabButtons" destination="E3f-DU-JbM" collectionClass="NSMutableArray" id="z2i-Wi-yMR"/>
+                <outlet property="segmentedControl" destination="WVx-Ef-poS" id="JXn-OE-llE"/>
+                <outlet property="segmentedControlHeight" destination="Jwi-Yh-ZOJ" id="eT4-RL-G6X"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="zIF-dC-TqL">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="279"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kzl-ye-VGt">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="279"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dlF-9e-tCn">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="236"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I9r-ec-NOx">
                                     <rect key="frame" x="128" y="103" width="64" height="30"/>
-                                    <animations/>
                                     <state key="normal" title="Touch"/>
                                     <connections>
                                         <action selector="touchButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="Uxd-fw-nyY"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <animations/>
-                            <color key="backgroundColor" red="0.85098039219999999" green="0.96078431369999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.85098039219999999" green="0.96078431369999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="I9r-ec-NOx" firstAttribute="top" secondItem="dlF-9e-tCn" secondAttribute="top" constant="103" id="DVZ-e7-rQ1"/>
                                 <constraint firstAttribute="bottom" secondItem="I9r-ec-NOx" secondAttribute="bottom" constant="103" id="Lgq-ae-OJb"/>
@@ -43,65 +45,34 @@
                                 <constraint firstAttribute="trailing" secondItem="I9r-ec-NOx" secondAttribute="trailing" constant="128" id="tv8-hb-yfE"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOP-Fj-Yt4">
-                            <rect key="frame" x="0.0" y="236" width="320" height="44"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRh-Ud-SCY">
-                                    <rect key="frame" x="0.0" y="0.0" width="160" height="44"/>
-                                    <animations/>
-                                    <color key="backgroundColor" red="0.85098039215686272" green="1" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="44" id="w4h-3b-RUc"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="tintColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <state key="normal" title="first">
-                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="tabButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="8x9-bf-hKo"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3f-DU-JbM">
-                                    <rect key="frame" x="160" y="0.0" width="160" height="44"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <state key="normal" title="second"/>
-                                    <connections>
-                                        <action selector="tabButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="Y0P-Fr-Pvo"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <animations/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WVx-Ef-poS" userLabel="segmentedControl">
+                            <rect key="frame" x="0.0" y="236" width="320" height="45"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="WRh-Ud-SCY" firstAttribute="height" secondItem="E3f-DU-JbM" secondAttribute="height" id="FLg-lq-hIq"/>
-                                <constraint firstItem="E3f-DU-JbM" firstAttribute="top" secondItem="XOP-Fj-Yt4" secondAttribute="top" id="PVt-gV-43h"/>
-                                <constraint firstAttribute="bottom" secondItem="WRh-Ud-SCY" secondAttribute="bottom" id="QVv-ub-EKT"/>
-                                <constraint firstItem="WRh-Ud-SCY" firstAttribute="top" secondItem="XOP-Fj-Yt4" secondAttribute="top" id="RN9-yb-jbs"/>
-                                <constraint firstAttribute="bottom" secondItem="E3f-DU-JbM" secondAttribute="bottom" id="XLc-Gc-pzf"/>
-                                <constraint firstItem="WRh-Ud-SCY" firstAttribute="width" secondItem="E3f-DU-JbM" secondAttribute="width" id="bVD-pH-hod"/>
-                                <constraint firstAttribute="trailing" secondItem="E3f-DU-JbM" secondAttribute="trailing" id="ey2-66-npX"/>
-                                <constraint firstItem="E3f-DU-JbM" firstAttribute="leading" secondItem="WRh-Ud-SCY" secondAttribute="trailing" id="jQx-04-cLY"/>
-                                <constraint firstItem="WRh-Ud-SCY" firstAttribute="leading" secondItem="XOP-Fj-Yt4" secondAttribute="leading" id="kha-9W-0Xh"/>
+                                <constraint firstAttribute="height" constant="44" id="Jwi-Yh-ZOJ"/>
                             </constraints>
-                        </view>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentValueChanged:" destination="-1" eventType="valueChanged" id="sxk-Ed-p2c"/>
+                            </connections>
+                        </segmentedControl>
                     </subviews>
-                    <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="XOP-Fj-Yt4" secondAttribute="trailing" id="6Oh-Vk-ZQf"/>
+                        <constraint firstItem="WVx-Ef-poS" firstAttribute="leading" secondItem="Kzl-ye-VGt" secondAttribute="leading" id="AXa-qH-y6V"/>
                         <constraint firstItem="dlF-9e-tCn" firstAttribute="top" secondItem="Kzl-ye-VGt" secondAttribute="top" id="Kra-rk-AoZ"/>
-                        <constraint firstAttribute="bottom" secondItem="XOP-Fj-Yt4" secondAttribute="bottom" id="PTr-hh-jto"/>
-                        <constraint firstItem="XOP-Fj-Yt4" firstAttribute="top" secondItem="dlF-9e-tCn" secondAttribute="bottom" id="TbK-cr-l9W"/>
+                        <constraint firstAttribute="trailing" secondItem="WVx-Ef-poS" secondAttribute="trailing" id="PWh-Ae-Dqx"/>
+                        <constraint firstAttribute="bottom" secondItem="WVx-Ef-poS" secondAttribute="bottom" id="Pmv-cX-Vpf"/>
                         <constraint firstAttribute="trailing" secondItem="dlF-9e-tCn" secondAttribute="trailing" id="hpw-kg-Ga8"/>
-                        <constraint firstItem="XOP-Fj-Yt4" firstAttribute="leading" secondItem="Kzl-ye-VGt" secondAttribute="leading" id="k3H-A8-Yoy"/>
-                        <constraint firstItem="XOP-Fj-Yt4" firstAttribute="width" secondItem="Kzl-ye-VGt" secondAttribute="width" id="kWD-gi-Mow"/>
-                        <constraint firstItem="dlF-9e-tCn" firstAttribute="leading" secondItem="Kzl-ye-VGt" secondAttribute="leading" id="tek-Yz-xI3"/>
+                        <constraint firstItem="WVx-Ef-poS" firstAttribute="width" secondItem="Kzl-ye-VGt" secondAttribute="width" id="jQD-FQ-iZX"/>
+                        <constraint firstItem="dlF-9e-tCn" firstAttribute="leading" secondItem="Kzl-ye-VGt" secondAttribute="leading" id="rGq-LY-ukU"/>
+                        <constraint firstItem="WVx-Ef-poS" firstAttribute="top" secondItem="dlF-9e-tCn" secondAttribute="bottom" id="ruY-qh-7LR"/>
                     </constraints>
                 </scrollView>
             </subviews>
-            <animations/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Kzl-ye-VGt" secondAttribute="bottom" id="DkP-r8-zfJ"/>
                 <constraint firstItem="Kzl-ye-VGt" firstAttribute="height" secondItem="zIF-dC-TqL" secondAttribute="height" id="Ec8-8P-AZI"/>
@@ -112,7 +83,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="129" y="346"/>
+            <point key="canvasLocation" x="129" y="258.5"/>
         </view>
     </objects>
 </document>

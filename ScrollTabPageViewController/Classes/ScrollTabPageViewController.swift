@@ -15,16 +15,27 @@ protocol ScrollTabPageViewControllerProtocol {
 
 class ScrollTabPageViewController: UIPageViewController {
 
-    private let contentViewHeihgt: CGFloat = 280.0
-    private let tabViewHeight: CGFloat = 44.0
-    private var pageViewControllers: [UIViewController] = []
-    private var contentsView: ContentsView!
-    private var scrollContentOffsetY: CGFloat = 0.0
-    private var shouldScrollFrame: Bool = true
-    private var shouldUpdateLayout: Bool = false
-    private var updateIndex: Int = 0
-    private var currentIndex: Int? {
-        guard let viewController = viewControllers?.first, index = pageViewControllers.indexOf(viewController) else {
+    var pageViewControllers: [UIViewController] = []
+    
+    // pageViewControllerの更新index
+    var updateIndex: Int = 0
+    
+    var contentsView: ContentsView!
+    
+    // contentViewの高さ
+    let contentViewHeihgt: CGFloat = 280.0
+    
+    // contentsViewのスクロールの値
+    var scrollContentOffsetY: CGFloat = 0.0
+    
+    var shouldScrollFrame: Bool = true
+    var shouldUpdateLayout: Bool = false
+    let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
+    
+    
+    // tabViewControllerの現在のindex
+    var currentIndex: Int? {
+        guard let viewController = viewControllers?.first, let index = pageViewControllers.index(of: viewController) else {
             return nil
         }
         return index
@@ -32,8 +43,7 @@ class ScrollTabPageViewController: UIPageViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupOutlets()
+        self.setupOutlets()
     }
 }
 
@@ -42,36 +52,45 @@ class ScrollTabPageViewController: UIPageViewController {
 
 extension ScrollTabPageViewController {
 
-    private func setupOutlets() {
+    // outletをセットアップ
+    func setupOutlets() {
         setupViewControllers()
         setupContentsView()
         setupPageViewController()
     }
 
-    private func setupViewControllers() {
+    // viewControllerをセットアップ
+    // 別々のviewControllerを設定する場合はvc1&2の読み込み内容を変更する
+    func setupViewControllers() {
+        // viewContrroller
         let sb1 = UIStoryboard(name: "ViewController", bundle: nil)
-        let vc1 = sb1.instantiateViewControllerWithIdentifier("ViewController")
+        let vc1 = sb1.instantiateViewController(withIdentifier: "ViewController")
 
+        // viewContrroller
         let sb2 = UIStoryboard(name: "ViewController", bundle: nil)
-        let vc2 = sb2.instantiateViewControllerWithIdentifier("ViewController")
+        let vc2 = sb2.instantiateViewController(withIdentifier: "ViewController")
 
         pageViewControllers = [vc1, vc2]
     }
 
-    private func setupPageViewController() {
+    // pageViewControllerをセットアップする
+    func setupPageViewController() {
         dataSource = self
         delegate = self
 
+        // 初回表示のviewControllerをセット
         setViewControllers([pageViewControllers[0]],
-            direction: .Forward,
+            direction: .forward,
             animated: false,
             completion: { [weak self] (completed: Bool) in
-                self?.setupContentInset()
+                self?.setupCurrentContentInset()
             })
     }
 
-    private func setupContentsView() {
-        contentsView = ContentsView(frame: CGRectMake(0.0, 0.0, view.frame.width, contentViewHeihgt))
+    // contentsViewのセットアップ
+    func setupContentsView() {
+        contentsView = ContentsView(frame: CGRect(x:0.0, y:0.0, width:view.frame.width, height:contentViewHeihgt))
+        // タブボタンがタップされた時のブロック
         contentsView.tabButtonPressedBlock = { [weak self] (index: Int) in
             guard let uself = self else {
                 return
@@ -79,7 +98,7 @@ extension ScrollTabPageViewController {
 
             uself.shouldUpdateLayout = true
             uself.updateIndex = index
-            let direction: UIPageViewControllerNavigationDirection = (uself.currentIndex < index) ? .Forward : .Reverse
+            let direction: UIPageViewControllerNavigationDirection = (uself.currentIndex! < index) ? .forward : .reverse
             uself.setViewControllers([uself.pageViewControllers[index]],
                 direction: direction,
                 animated: true,
@@ -88,15 +107,17 @@ extension ScrollTabPageViewController {
                         return
                     }
                     if uself.shouldUpdateLayout {
-                        uself.setupContentOffsetY(index, scroll: -uself.scrollContentOffsetY)
+                        uself.setupContentOffsetY(index:index, scroll: -uself.scrollContentOffsetY)
                         uself.shouldUpdateLayout = false
                     }
                 })
         }
 
+        // contentViewのスクロール表示が変更された時のブロック
         contentsView.scrollDidChangedBlock = { [weak self] (scroll: CGFloat, shouldScrollFrame: Bool) in
             self?.shouldScrollFrame = shouldScrollFrame
-            self?.updateContentOffsetY(scroll)
+            // Y座標を更新する
+            self?.updateContentOffsetY(scroll: scroll)
         }
         view.addSubview(contentsView)
     }
@@ -107,29 +128,52 @@ extension ScrollTabPageViewController {
 
 extension ScrollTabPageViewController {
 
-    private func setupContentInset() {
-        guard let currentIndex = currentIndex, vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol else {
+    /**
+     現在のscrollViewのcontentInsetをセット
+     */
+    func setupCurrentContentInset() {
+        guard let currentIndex = currentIndex, let vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol else {
             return
         }
 
-        let inset = UIEdgeInsetsMake(contentViewHeihgt, 0.0, 0.0, 0.0)
-        vc.scrollView.contentInset = inset
-        vc.scrollView.scrollIndicatorInsets = inset
+        vc.scrollView.contentInset.top = contentViewHeihgt
+        vc.scrollView.scrollIndicatorInsets.top = contentViewHeihgt
+    }
+    
+    /**
+     次のscrollViewのcontentInsetをセット
+     */
+    func setupNextContentInset(nextIndex:Int) {
+        guard let vc = pageViewControllers[nextIndex] as? ScrollTabPageViewControllerProtocol else {
+            return
+        }
+        
+        vc.scrollView.contentInset.top = contentViewHeihgt
+        vc.scrollView.scrollIndicatorInsets.top = contentViewHeihgt
     }
 
-    private func setupContentOffsetY(index: Int, scroll: CGFloat) {
+    /**
+     Y座標をセット(初期表示やページングがされた時)
+     - parameter index: ページングのindex
+     - parameter scroll: どれだけスクロールしているか
+     */
+    func setupContentOffsetY(index: Int, scroll: CGFloat) {
         guard let  vc = pageViewControllers[index] as? ScrollTabPageViewControllerProtocol else {
             return
         }
 
         if scroll == 0.0 {
             vc.scrollView.contentOffset.y = -contentViewHeihgt
-        } else if (scroll < contentViewHeihgt - tabViewHeight) || (vc.scrollView.contentOffset.y <= -tabViewHeight) {
+        } else if (scroll < contentViewHeihgt - contentsView.segmentedControlHeight.constant) || (vc.scrollView.contentOffset.y <= -contentsView.segmentedControlHeight.constant) {
             vc.scrollView.contentOffset.y = scroll - contentViewHeihgt
         }
     }
 
-    private func updateContentView(scroll: CGFloat) {
+    /**
+     viewControllerのスクロールでのcontentViewを更新
+     - parameter scroll: 移動した分の座標
+     */
+    func updateContentView(scroll: CGFloat) {
         if shouldScrollFrame {
             contentsView.frame.origin.y = scroll
             scrollContentOffsetY = scroll
@@ -137,24 +181,32 @@ extension ScrollTabPageViewController {
         shouldScrollFrame = true
     }
 
-    private func updateContentOffsetY(scroll: CGFloat) {
-        if let currentIndex = currentIndex, vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol {
+    /**
+     Y座標を更新
+     - parameter scroll: 移動した分の座標
+     */
+    func updateContentOffsetY(scroll: CGFloat) {
+        if let currentIndex = currentIndex, let vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol {
             vc.scrollView.contentOffset.y += scroll
         }
     }
 
     func updateContentViewFrame() {
-        guard let currentIndex = currentIndex, vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol else {
+        guard let currentIndex = currentIndex, let vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol else {
             return
         }
 
-        if vc.scrollView.contentOffset.y >= -tabViewHeight {
-            let scroll = contentViewHeihgt - tabViewHeight
-            updateContentView(-scroll)
-            vc.scrollView.scrollIndicatorInsets.top = tabViewHeight
+        // 予めスクロールのcontentOffsetはcontentsViewの分だけ差し引かれている。
+        // スクロールの長さがsegmentedControlの高さより大きいかどうか判定
+        if vc.scrollView.contentOffset.y >= -contentsView.segmentedControlHeight.constant {
+            // tableViewのスクロール更新
+            let scroll = contentViewHeihgt - contentsView.segmentedControlHeight.constant
+            updateContentView(scroll: -scroll)
+            vc.scrollView.scrollIndicatorInsets.top = contentsView.segmentedControlHeight.constant
         } else {
+            // contentsViewとtableViewのスクロール更新
             let scroll = contentViewHeihgt + vc.scrollView.contentOffset.y
-            updateContentView(-scroll)
+            updateContentView(scroll: -scroll)
             vc.scrollView.scrollIndicatorInsets.top = -vc.scrollView.contentOffset.y
         }
     }
@@ -164,9 +216,8 @@ extension ScrollTabPageViewController {
             let vc = pageViewControllers[updateIndex] as? ScrollTabPageViewControllerProtocol
             let shouldSetupContentOffsetY = vc?.scrollView.contentInset.top != contentViewHeihgt
             
-            let scroll = scrollContentOffsetY
-            setupContentInset()
-            setupContentOffsetY(updateIndex, scroll: -scroll)
+            setupCurrentContentInset()
+            setupContentOffsetY(index: updateIndex, scroll: -scrollContentOffsetY)
             shouldUpdateLayout = shouldSetupContentOffsetY
         }
     }
@@ -177,27 +228,39 @@ extension ScrollTabPageViewController {
 
 extension ScrollTabPageViewController: UIPageViewControllerDataSource {
 
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-
-        guard var index = pageViewControllers.indexOf(viewController) else {
+    /**
+     1つ目のviewControllerに戻った時の処理
+     - parameter pageViewController: pageViewController
+     - parameter viewController: 現在表示されている2つ目のviewController
+     - returns: 1つ目に戻った時に表示されるviewController
+     */
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+            
+            guard var index = pageViewControllers.index(of: viewController) else {
+                return nil
+            }
+            
+            index = index - 1
+            
+            if index >= 0 && index < pageViewControllers.count {
+                return pageViewControllers[index]
+            }
             return nil
-        }
-
-        index++
-
-        if index >= 0 && index < pageViewControllers.count {
-            return pageViewControllers[index]
-        }
-        return nil
     }
+    
+    /**
+     2つ目のviewControllerに進んだ時の処理
+     - parameter pageViewController: pageViewController
+     - parameter viewController: 現在表示されている1つ目のviewController
+     - returns: 2つ目に進んだ時に表示されるviewController
+     */
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
 
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-
-        guard var index = pageViewControllers.indexOf(viewController) else {
+        guard var index = pageViewControllers.index(of: viewController) else {
             return nil
         }
 
-        index--
+        index = index + 1
 
         if index >= 0 && index < pageViewControllers.count {
             return pageViewControllers[index]
@@ -211,26 +274,38 @@ extension ScrollTabPageViewController: UIPageViewControllerDataSource {
 
 extension ScrollTabPageViewController: UIPageViewControllerDelegate {
 
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
-        if let vc = pendingViewControllers.first, index = pageViewControllers.indexOf(vc) {
+    /**
+     スワイプでpageViewControllerで別のviewControllerに遷移する時の処理
+     - parameter pageViewController: pageViewController
+     - parameter pagingViewControllers: これから遷移しようとしているviewController
+     */
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        if let vc = pendingViewControllers.first, let index = pageViewControllers.index(of: vc) {
             shouldUpdateLayout = true
             updateIndex = index
+            setupNextContentInset(nextIndex: updateIndex)
         }
-
     }
 
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        guard let _ = previousViewControllers.first, currentIndex = currentIndex else {
+    /**
+     pageViewControllerのアニメーションが終わった時の処理
+     - parameter pageViewController: pageViewController
+     - parameter fisnished: アニメーション完了のBOOL値
+     - parameter previousViewControllers: 遷移前のviewController
+     - parameter completed: 遷移完了のBOOL値
+     */
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard let _ = previousViewControllers.first, let currentIndex = currentIndex else {
             return
         }
 
         if shouldUpdateLayout {
-            setupContentInset()
-            setupContentOffsetY(currentIndex, scroll: -scrollContentOffsetY)
+            setupCurrentContentInset()
+            setupContentOffsetY(index: currentIndex, scroll: -scrollContentOffsetY)
         }
 
-        if currentIndex >= 0 && currentIndex < contentsView.tabButtons.count {
-            contentsView.updateCurrentIndex(currentIndex, animated: false)
+        if currentIndex >= 0 && currentIndex < contentsView.segmentedControl.numberOfSegments {
+            contentsView.updateCurrentIndex(index: currentIndex, animated: false)
         }
     }
 }
