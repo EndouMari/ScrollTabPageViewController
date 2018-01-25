@@ -14,7 +14,6 @@ class ContentsView: UIView {
     var currentIndex: Int = 0
     
     
-    
     var tabButtonPressedBlock: ((_ index: Int) -> Void)?
     var scrollDidChangedBlock: ((_ scroll: CGFloat, _ shouldScroll: Bool) -> Void)?
 
@@ -24,7 +23,6 @@ class ContentsView: UIView {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var segmentedControlHeight: NSLayoutConstraint!
     let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
@@ -39,8 +37,7 @@ class ContentsView: UIView {
 
         sharedInit()
     }
-    
-    
+
     private func sharedInit() {
         Bundle.main.loadNibNamed("ContentsView", owner: self, options: nil)
         addSubview(contentView)
@@ -101,7 +98,7 @@ extension ContentsView {
 extension ContentsView: UIScrollViewDelegate {
 
     /**
-     contentsViewでのスクロールを検知
+     contentsViewへのスクロールを検知
      - parameter scrollView: scrollView
      */
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
