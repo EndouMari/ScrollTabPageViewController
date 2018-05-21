@@ -7,6 +7,19 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 protocol ScrollTabPageViewControllerProtocol {
     var scrollTabPageViewController: ScrollTabPageViewController { get }
@@ -15,16 +28,16 @@ protocol ScrollTabPageViewControllerProtocol {
 
 class ScrollTabPageViewController: UIPageViewController {
 
-    private let contentViewHeihgt: CGFloat = 280.0
-    private let tabViewHeight: CGFloat = 44.0
-    private var pageViewControllers: [UIViewController] = []
-    private var contentsView: ContentsView!
-    private var scrollContentOffsetY: CGFloat = 0.0
-    private var shouldScrollFrame: Bool = true
-    private var shouldUpdateLayout: Bool = false
-    private var updateIndex: Int = 0
-    private var currentIndex: Int? {
-        guard let viewController = viewControllers?.first, index = pageViewControllers.indexOf(viewController) else {
+    fileprivate let contentViewHeihgt: CGFloat = 280.0
+    fileprivate let tabViewHeight: CGFloat = 44.0
+    fileprivate var pageViewControllers: [UIViewController] = []
+    fileprivate var contentsView: ContentsView!
+    fileprivate var scrollContentOffsetY: CGFloat = 0.0
+    fileprivate var shouldScrollFrame: Bool = true
+    fileprivate var shouldUpdateLayout: Bool = false
+    fileprivate var updateIndex: Int = 0
+    fileprivate var currentIndex: Int? {
+        guard let viewController = viewControllers?.first, let index = pageViewControllers.index(of: viewController) else {
             return nil
         }
         return index
@@ -42,36 +55,36 @@ class ScrollTabPageViewController: UIPageViewController {
 
 extension ScrollTabPageViewController {
 
-    private func setupOutlets() {
+    fileprivate func setupOutlets() {
         setupViewControllers()
         setupContentsView()
         setupPageViewController()
     }
 
-    private func setupViewControllers() {
+    fileprivate func setupViewControllers() {
         let sb1 = UIStoryboard(name: "ViewController", bundle: nil)
-        let vc1 = sb1.instantiateViewControllerWithIdentifier("ViewController")
+        let vc1 = sb1.instantiateViewController(withIdentifier: "ViewController")
 
         let sb2 = UIStoryboard(name: "ViewController", bundle: nil)
-        let vc2 = sb2.instantiateViewControllerWithIdentifier("ViewController")
+        let vc2 = sb2.instantiateViewController(withIdentifier: "ViewController")
 
         pageViewControllers = [vc1, vc2]
     }
 
-    private func setupPageViewController() {
+    fileprivate func setupPageViewController() {
         dataSource = self
         delegate = self
 
         setViewControllers([pageViewControllers[0]],
-            direction: .Forward,
+            direction: .forward,
             animated: false,
             completion: { [weak self] (completed: Bool) in
                 self?.setupContentInset()
             })
     }
 
-    private func setupContentsView() {
-        contentsView = ContentsView(frame: CGRectMake(0.0, 0.0, view.frame.width, contentViewHeihgt))
+    fileprivate func setupContentsView() {
+        contentsView = ContentsView(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: contentViewHeihgt))
         contentsView.tabButtonPressedBlock = { [weak self] (index: Int) in
             guard let uself = self else {
                 return
@@ -79,7 +92,7 @@ extension ScrollTabPageViewController {
 
             uself.shouldUpdateLayout = true
             uself.updateIndex = index
-            let direction: UIPageViewControllerNavigationDirection = (uself.currentIndex < index) ? .Forward : .Reverse
+            let direction: UIPageViewControllerNavigationDirection = (uself.currentIndex < index) ? .forward : .reverse
             uself.setViewControllers([uself.pageViewControllers[index]],
                 direction: direction,
                 animated: true,
@@ -107,8 +120,8 @@ extension ScrollTabPageViewController {
 
 extension ScrollTabPageViewController {
 
-    private func setupContentInset() {
-        guard let currentIndex = currentIndex, vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol else {
+    fileprivate func setupContentInset() {
+        guard let currentIndex = currentIndex, let vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol else {
             return
         }
 
@@ -117,7 +130,7 @@ extension ScrollTabPageViewController {
         vc.scrollView.scrollIndicatorInsets = inset
     }
 
-    private func setupContentOffsetY(index: Int, scroll: CGFloat) {
+    fileprivate func setupContentOffsetY(_ index: Int, scroll: CGFloat) {
         guard let  vc = pageViewControllers[index] as? ScrollTabPageViewControllerProtocol else {
             return
         }
@@ -129,7 +142,7 @@ extension ScrollTabPageViewController {
         }
     }
 
-    private func updateContentView(scroll: CGFloat) {
+    fileprivate func updateContentView(_ scroll: CGFloat) {
         if shouldScrollFrame {
             contentsView.frame.origin.y = scroll
             scrollContentOffsetY = scroll
@@ -137,14 +150,14 @@ extension ScrollTabPageViewController {
         shouldScrollFrame = true
     }
 
-    private func updateContentOffsetY(scroll: CGFloat) {
-        if let currentIndex = currentIndex, vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol {
+    fileprivate func updateContentOffsetY(_ scroll: CGFloat) {
+        if let currentIndex = currentIndex, let vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol {
             vc.scrollView.contentOffset.y += scroll
         }
     }
 
     func updateContentViewFrame() {
-        guard let currentIndex = currentIndex, vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol else {
+        guard let currentIndex = currentIndex, let vc = pageViewControllers[currentIndex] as? ScrollTabPageViewControllerProtocol else {
             return
         }
 
@@ -177,13 +190,13 @@ extension ScrollTabPageViewController {
 
 extension ScrollTabPageViewController: UIPageViewControllerDataSource {
 
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
 
-        guard var index = pageViewControllers.indexOf(viewController) else {
+        guard var index = pageViewControllers.index(of: viewController) else {
             return nil
         }
 
-        index++
+        index += 1
 
         if index >= 0 && index < pageViewControllers.count {
             return pageViewControllers[index]
@@ -191,13 +204,13 @@ extension ScrollTabPageViewController: UIPageViewControllerDataSource {
         return nil
     }
 
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
 
-        guard var index = pageViewControllers.indexOf(viewController) else {
+        guard var index = pageViewControllers.index(of: viewController) else {
             return nil
         }
 
-        index--
+        index -= 1
 
         if index >= 0 && index < pageViewControllers.count {
             return pageViewControllers[index]
@@ -211,16 +224,16 @@ extension ScrollTabPageViewController: UIPageViewControllerDataSource {
 
 extension ScrollTabPageViewController: UIPageViewControllerDelegate {
 
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
-        if let vc = pendingViewControllers.first, index = pageViewControllers.indexOf(vc) {
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        if let vc = pendingViewControllers.first, let index = pageViewControllers.index(of: vc) {
             shouldUpdateLayout = true
             updateIndex = index
         }
 
     }
 
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        guard let _ = previousViewControllers.first, currentIndex = currentIndex else {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard let _ = previousViewControllers.first, let currentIndex = currentIndex else {
             return
         }
 
