@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContentsView" customModule="ScrollTabPageViewController" customModuleProvider="target">
@@ -27,15 +31,13 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I9r-ec-NOx">
                                     <rect key="frame" x="128" y="103" width="64" height="30"/>
-                                    <animations/>
                                     <state key="normal" title="Touch"/>
                                     <connections>
-                                        <action selector="touchButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="Uxd-fw-nyY"/>
+                                        <action selector="touchButtonTouchUpInsideButton:" destination="-1" eventType="touchUpInside" id="7jk-dN-mRh"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <animations/>
-                            <color key="backgroundColor" red="0.85098039219999999" green="0.96078431369999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.85098039219999999" green="0.96078431369999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="I9r-ec-NOx" firstAttribute="top" secondItem="dlF-9e-tCn" secondAttribute="top" constant="103" id="DVZ-e7-rQ1"/>
                                 <constraint firstAttribute="bottom" secondItem="I9r-ec-NOx" secondAttribute="bottom" constant="103" id="Lgq-ae-OJb"/>
@@ -48,32 +50,29 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRh-Ud-SCY">
                                     <rect key="frame" x="0.0" y="0.0" width="160" height="44"/>
-                                    <animations/>
-                                    <color key="backgroundColor" red="0.85098039215686272" green="1" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.85098039215686272" green="1" blue="0.83529411764705885" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="w4h-3b-RUc"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="tintColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="tintColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" title="first">
-                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="tabButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="8x9-bf-hKo"/>
+                                        <action selector="tabButtonTouchUpInsideButton:" destination="-1" eventType="touchUpInside" id="C4o-Ol-GlR"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3f-DU-JbM">
                                     <rect key="frame" x="160" y="0.0" width="160" height="44"/>
-                                    <animations/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <state key="normal" title="second"/>
                                     <connections>
-                                        <action selector="tabButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="Y0P-Fr-Pvo"/>
+                                        <action selector="tabButtonTouchUpInsideButton:" destination="-1" eventType="touchUpInside" id="uI5-yG-bGo"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <animations/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="WRh-Ud-SCY" firstAttribute="height" secondItem="E3f-DU-JbM" secondAttribute="height" id="FLg-lq-hIq"/>
                                 <constraint firstItem="E3f-DU-JbM" firstAttribute="top" secondItem="XOP-Fj-Yt4" secondAttribute="top" id="PVt-gV-43h"/>
@@ -87,8 +86,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="XOP-Fj-Yt4" secondAttribute="trailing" id="6Oh-Vk-ZQf"/>
                         <constraint firstItem="dlF-9e-tCn" firstAttribute="top" secondItem="Kzl-ye-VGt" secondAttribute="top" id="Kra-rk-AoZ"/>
@@ -101,7 +99,6 @@
                     </constraints>
                 </scrollView>
             </subviews>
-            <animations/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Kzl-ye-VGt" secondAttribute="bottom" id="DkP-r8-zfJ"/>
                 <constraint firstItem="Kzl-ye-VGt" firstAttribute="height" secondItem="zIF-dC-TqL" secondAttribute="height" id="Ec8-8P-AZI"/>
@@ -112,7 +109,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="129" y="346"/>
+            <point key="canvasLocation" x="206.40000000000001" y="311.24437781109447"/>
         </view>
     </objects>
 </document>
